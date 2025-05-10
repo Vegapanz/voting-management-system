@@ -246,30 +246,33 @@ public class newlogin extends javax.swing.JFrame {
             return;
         }
 
-        try {
+        try {   
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/vms", "root", ""); // Add password if needed
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/vms", "root", "");
 
             String sql = "SELECT * FROM voters WHERE email = ? AND password = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
-            ps.setString(2, hashedPassword); // instead of plain password
+            ps.setString(2, hashedPassword);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                int votersID = rs.getInt("votersID");
+                int voterID = rs.getInt("votersID");
                 String name = rs.getString("name");
-                // Login successful
-                JOptionPane.showMessageDialog(null, "Login successful. Welcome, " + rs.getString("name") + "!");
-                // TODO: Open next window or dashboard here
-                
-                Vote voteForm = new Vote(votersID);
-                voteForm.setVisible(true);
+                String emailFromDB = rs.getString("email");
+
+                JOptionPane.showMessageDialog(null, "Login successful. Welcome, " + name + "!");
+
+                // Admin condition based on email
+                if (emailFromDB.equalsIgnoreCase("admin@vms.com")) {
+                    new AdminDashboard().setVisible(true);
+                } else {
+                    new Vote(voterID).setVisible(true);
+                }
+
                 this.dispose();
             } else {
-                // Login failed
                 JOptionPane.showMessageDialog(null, "Invalid email or password. Please try again.");
             }
 
@@ -277,7 +280,7 @@ public class newlogin extends javax.swing.JFrame {
             ps.close();
             conn.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Login Error: " + e.getMessage());
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 

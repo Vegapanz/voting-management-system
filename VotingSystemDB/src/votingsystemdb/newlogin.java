@@ -26,23 +26,9 @@ public class newlogin extends javax.swing.JFrame {
      */
     public newlogin() {
         initComponents();
-        
+        setResizable(false);
     }
     
-    private Connection connectDatabase() {
-        Connection conn = null;
-        try {
-            // Make sure you adjust the URL, user, and password depending on your database setup
-            String url = "jdbc:mysql://localhost:3306/vms"; // Database name is votingdb
-            String user = "root";
-            String password = ""; // or your MySQL password
-
-            conn = DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Database Connection Failed: " + e.getMessage());
-        }
-        return conn;
-    }
     
     private String hashPassword(String password) {
         try {
@@ -254,9 +240,15 @@ public class newlogin extends javax.swing.JFrame {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                int votersID = rs.getInt("votersID");
+                String name = rs.getString("name");
                 // Login successful
                 JOptionPane.showMessageDialog(null, "Login successful. Welcome, " + rs.getString("name") + "!");
                 // TODO: Open next window or dashboard here
+                
+                Vote voteForm = new Vote(votersID);
+                voteForm.setVisible(true);
+                this.dispose();
             } else {
                 // Login failed
                 JOptionPane.showMessageDialog(null, "Invalid email or password. Please try again.");
@@ -273,6 +265,9 @@ public class newlogin extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.dispose(); // closes the current form
+        
+        home home = new home();
+        home.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**

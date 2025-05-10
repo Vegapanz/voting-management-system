@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
-
+import java.sql.ResultSet;
 /**
  *
  * @author Admin
@@ -24,7 +24,9 @@ public class register extends javax.swing.JFrame {
      */
     public register() {
         initComponents();
+        setResizable(false);
     }
+
     
     private Connection connectDatabase() {
         Connection conn = null;
@@ -309,31 +311,46 @@ public class register extends javax.swing.JFrame {
         String hashedPassword = hashPassword(password);
 
         // === DATABASE INSERT ===
+        
+        
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/vms", "root", "");
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/vms", "root", "");
 
-            String sql = "INSERT INTO voters (name, password, email, phoneNumber) VALUES (?, ?, ?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, name);
-            ps.setString(2, hashedPassword); // hashed password stored
-            ps.setString(3, email);
-            ps.setString(4, phone);
+        // ✅ Check for duplicate email first
+        String checkSql = "SELECT email FROM voters WHERE email = ?";
+        PreparedStatement checkStmt = conn.prepareStatement(checkSql);
+        checkStmt.setString(1, email);
+        ResultSet rs = checkStmt.executeQuery();
 
-            int rows = ps.executeUpdate();
-
-            if (rows > 0) {
-                JOptionPane.showMessageDialog(null, "Registration successful! Redirecting to login...");
-
-                // Open Login Form
-                newlogin loginForm = new newlogin();
-                loginForm.setVisible(true);
-
-                // Close current form
-                this.dispose();
-            }
-
+        if (rs.next()) {
+            JOptionPane.showMessageDialog(null, "An account with this email already exists.");
+            rs.close();
+            checkStmt.close();
             conn.close();
+            return; // ❌ stop registration
+        }
+        rs.close();
+        checkStmt.close();
+
+        // ✅ Continue if email is unique
+        String sql = "INSERT INTO voters (name, password, email, phoneNumber) VALUES (?, ?, ?, ?)";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, name);
+        ps.setString(2, hashedPassword);
+        ps.setString(3, email);
+        ps.setString(4, phone);
+
+        int rows = ps.executeUpdate();
+
+        if (rows > 0) {
+            JOptionPane.showMessageDialog(null, "Registration successful! Redirecting to login...");
+            new newlogin().setVisible(true);
+            this.dispose();
+        }
+
+        ps.close();
+        conn.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Registration failed: " + e.getMessage());
         } catch (ClassNotFoundException e) {
@@ -344,6 +361,9 @@ public class register extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.dispose(); // closes the current form
+        
+        home home = new home();
+        home.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**

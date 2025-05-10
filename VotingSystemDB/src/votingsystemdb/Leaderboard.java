@@ -65,7 +65,6 @@ public class Leaderboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator1 = new javax.swing.JSeparator();
-        jColorChooser1 = new javax.swing.JColorChooser();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -97,6 +96,8 @@ public class Leaderboard extends javax.swing.JFrame {
                 "Candidate", "Votes"
             }
         ));
+        leaderboardTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        leaderboardTable.setRowHeight(57);
         jScrollPane1.setViewportView(leaderboardTable);
 
         cancelButton.setBackground(new java.awt.Color(255, 51, 102));
@@ -233,7 +234,6 @@ public class Leaderboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

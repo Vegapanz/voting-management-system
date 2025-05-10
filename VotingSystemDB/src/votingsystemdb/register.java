@@ -124,6 +124,7 @@ public class register extends javax.swing.JFrame {
             }
         });
 
+        showPasswordCheckBox.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
         showPasswordCheckBox.setForeground(new java.awt.Color(0, 0, 0));
         showPasswordCheckBox.setText("Show Password");
         showPasswordCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +247,7 @@ public class register extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -65,6 +65,7 @@ public class newlogin extends javax.swing.JFrame {
         submitButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Page");
@@ -95,7 +96,10 @@ public class newlogin extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Password:");
 
+        showPasswordCheckBox.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        showPasswordCheckBox.setForeground(new java.awt.Color(0, 0, 0));
         showPasswordCheckBox.setText("Show Password");
+        showPasswordCheckBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         showPasswordCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showPasswordCheckBoxActionPerformed(evt);
@@ -126,6 +130,16 @@ public class newlogin extends javax.swing.JFrame {
         passwordField.setFont(new java.awt.Font("Montserrat ExtraBold", 1, 24)); // NOI18N
         passwordField.setForeground(new java.awt.Color(0, 255, 255));
 
+        jLabel4.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Register Here");
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -141,7 +155,10 @@ public class newlogin extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
                             .addComponent(jLabel2)
-                            .addComponent(showPasswordCheckBox)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(showPasswordCheckBox)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4))
                             .addComponent(passwordField))
                         .addGap(100, 100, 100))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -164,7 +181,9 @@ public class newlogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showPasswordCheckBox)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(showPasswordCheckBox)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
@@ -186,7 +205,7 @@ public class newlogin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -270,6 +289,14 @@ public class newlogin extends javax.swing.JFrame {
         home.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        
+        register register = new register();
+        register.setVisible(true);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -311,6 +338,7 @@ public class newlogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField passwordField;

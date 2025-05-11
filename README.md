@@ -80,7 +80,7 @@ A Java Swing-based Voting Management System with MySQL backend. Built in NetBean
 
 ```
 Email: admin@vms.com
-Password: (your SHA-256 hashed password)
+Password: admin123
 ```
 
 Hash passwords using the same algorithm used in registration.

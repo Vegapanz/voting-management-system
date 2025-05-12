@@ -71,7 +71,7 @@ A Java Swing-based Voting Management System with MySQL backend. Built in NetBean
 1. **Clone this repo**
 2. Import into **NetBeans**
 3. Setup **MySQL database** `vms` with the provided tables
-4. Add `itext-2.1.7.jar` to the project libraries
+4. Add `itext-2.1.7.jar` and `mysql-connector-j-9.3.0.jar` to the project libraries
 5. Run `home.java` to start the application
 
 ---
